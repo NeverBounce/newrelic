@@ -1,10 +1,10 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Intouch\Newrelic\Handler;
 
 class NullHandler implements Handler
 {
-    public function handle($functionName, array $arguments = array())
+    public function handle(string $functionName, array $arguments = [])
     {
         return false;
     }

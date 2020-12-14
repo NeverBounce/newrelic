@@ -4,6 +4,8 @@ namespace Intouch\Newrelic\Test;
 
 use Intouch\Newrelic\Newrelic;
 use PHPUnit\Framework\TestCase;
+use Intouch\Newrelic\Handler\NullHandler;
+use Intouch\Newrelic\Handler\DefaultHandler;
 
 class NewrelicTest extends TestCase
 {
@@ -11,9 +13,9 @@ class NewrelicTest extends TestCase
     {
         $agent = new Newrelic();
 
-        $class = 'Intouch\Newrelic\Handler\NullHandler';
+        $class = NullHandler::class;
         if ($this->isExtensionLoaded()) {
-            $class = 'Intouch\Newrelic\Handler\DefaultHandler';
+            $class = DefaultHandler::class;
         }
 
         $this->assertAttributeInstanceOf($class, 'handler', $agent);

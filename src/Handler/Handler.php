@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Intouch\Newrelic\Handler;
 
@@ -10,5 +10,5 @@ interface Handler
      *
      * @return mixed
      */
-    public function handle($functionName, array $arguments = array());
+    public function handle(string $functionName, array $arguments = []);
 }

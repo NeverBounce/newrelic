@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /**
  * Copyright 2013 In-Touch Insight Systems
  *
@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 namespace Intouch\Newrelic;
 
 use Intouch\Newrelic\Handler\DefaultHandler;
@@ -44,9 +45,8 @@ class Newrelic
      * NewRelic PHP agent methods are not found.
      *
      * @param bool $throw
-     * @param Handler $handler
+     * @param \Intouch\Newrelic\Handler\Handler|null $handler
      *
-     * @throws \RuntimeException
      */
     public function __construct($throw = false, Handler $handler = null)
     {
@@ -88,13 +88,13 @@ class Newrelic
      *
      * @param string $name
      * @param string $license
-     * @param bool   $xmit
+     * @param bool $xmit
      *
      * @return bool
      */
-    public function setAppName($name, $license = "", $xmit = false)
+    public function setAppName(string $name, string $license = "", bool $xmit = false): bool
     {
-        return $this->call('newrelic_set_appname', array($name, $license, $xmit));
+        return $this->call('newrelic_set_appname', [$name, $license, $xmit]);
     }
 
     /**
@@ -109,17 +109,17 @@ class Newrelic
      *
      * NOTE: You should always pass an exception here if possible.
      *
-     * @param string          $message
+     * @param string $message
      * @param \Exception|null $exception
      *
      * @return mixed
      */
-    public function noticeError($message, $exception = null)
+    public function noticeError(string $message, $exception = null)
     {
         if ($exception instanceof \Exception) {
-            return $this->call('newrelic_notice_error', array($message, $exception));
+            return $this->call('newrelic_notice_error', [$message, $exception]);
         } else {
-            return $this->call('newrelic_notice_error', array($message));
+            return $this->call('newrelic_notice_error', [$message]);
         }
     }
 
@@ -139,9 +139,9 @@ class Newrelic
      *
      * @return mixed
      */
-    public function nameTransaction($name)
+    public function nameTransaction(string $name)
     {
-        return $this->call('newrelic_name_transaction', array($name));
+        return $this->call('newrelic_name_transaction', [$name]);
     }
 
     /**
@@ -177,9 +177,9 @@ class Newrelic
      *
      * @return mixed
      */
-    public function endTransaction($ignore = false)
+    public function endTransaction(bool $ignore = false)
     {
-        return $this->call('newrelic_end_transaction', array($ignore));
+        return $this->call('newrelic_end_transaction', [$ignore]);
     }
 
     /**
@@ -195,9 +195,9 @@ class Newrelic
      *
      * @return mixed
      */
-    public function startTransaction($name, $license = "")
+    public function startTransaction(string $name, string $license = "")
     {
-        return $this->call('newrelic_start_transaction', array($name, $license));
+        return $this->call('newrelic_start_transaction', [$name, $license]);
     }
 
     /**
@@ -231,9 +231,9 @@ class Newrelic
      *
      * @return mixed
      */
-    public function backgroundJob($flag = true)
+    public function backgroundJob(bool $flag = true)
     {
-        return $this->call('newrelic_background_job', array($flag));
+        return $this->call('newrelic_background_job', [$flag]);
     }
 
     /**
@@ -245,9 +245,9 @@ class Newrelic
      *
      * @return mixed
      */
-    public function captureParams($enable = true)
+    public function captureParams(bool $enable = true)
     {
-        return $this->call('newrelic_capture_params', array($enable));
+        return $this->call('newrelic_capture_params', [$enable]);
     }
 
     /**
@@ -261,13 +261,13 @@ class Newrelic
      * metric names can cause automatic clamps that will affect other data.
      *
      * @param string $name
-     * @param mixed  $value
+     * @param mixed $value
      *
      * @return mixed
      */
-    public function customMetric($name, $value)
+    public function customMetric(string $name, $value)
     {
-        return $this->call('newrelic_custom_metric', array($name, $value));
+        return $this->call('newrelic_custom_metric', [$name, $value]);
     }
 
     /**
@@ -276,13 +276,13 @@ class Newrelic
      * from this transaction.
      *
      * @param string $key
-     * @param mixed  $value
+     * @param mixed $value
      *
      * @return mixed
      */
-    public function addCustomParameter($key, $value)
+    public function addCustomParameter(string $key, $value)
     {
-        return $this->call('newrelic_add_custom_parameter', array($key, $value));
+        return $this->call('newrelic_add_custom_parameter', [$key, $value]);
     }
 
     /**
@@ -295,9 +295,9 @@ class Newrelic
      *
      * @return mixed
      */
-    public function addCustomTracer($function_name)
+    public function addCustomTracer(string $function_name)
     {
-        return $this->call('newrelic_add_custom_tracer', array($function_name));
+        return $this->call('newrelic_add_custom_tracer', [$function_name]);
     }
 
     /**
@@ -309,9 +309,9 @@ class Newrelic
      *
      * @return string
      */
-    public function getBrowserTimingHeader($flag = true)
+    public function getBrowserTimingHeader(bool $flag = true): string
     {
-        return $this->call('newrelic_get_browser_timing_header', array($flag));
+        return $this->call('newrelic_get_browser_timing_header', [$flag]);
     }
 
     /**
@@ -323,9 +323,9 @@ class Newrelic
      *
      * @return string
      */
-    public function getBrowserTimingFooter($flag = true)
+    public function getBrowserTimingFooter(bool $flag = true): string
     {
-        return $this->call('newrelic_get_browser_timing_footer', array($flag));
+        return $this->call('newrelic_get_browser_timing_footer', [$flag]);
     }
 
     /**
@@ -350,9 +350,9 @@ class Newrelic
      *
      * @return mixed
      */
-    public function setUserAttributes($user = "", $account = "", $product = "")
+    public function setUserAttributes(string $user = "", string $account = "", string $product = "")
     {
-        return $this->call('newrelic_set_user_attributes', array($user, $account, $product));
+        return $this->call('newrelic_set_user_attributes', [$user, $account, $product]);
     }
 
     /**
@@ -372,20 +372,20 @@ class Newrelic
      *
      * @return mixed
      */
-    public function recordCustomEvent($name, array $attributes)
+    public function recordCustomEvent(string $name, array $attributes)
     {
-        return $this->call('newrelic_record_custom_event', array($name, $attributes));
+        return $this->call('newrelic_record_custom_event', [$name, $attributes]);
     }
 
     /**
      * Call the named method with the given params.  Return false if the NewRelic PHP agent is not available.
      *
      * @param string $method
-     * @param array  $params
+     * @param array $params
      *
      * @return mixed
      */
-    protected function call($method, array $params = array())
+    protected function call(string $method, array $params = [])
     {
         return $this->handler->handle($method, $params);
     }
