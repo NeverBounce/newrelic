@@ -92,7 +92,7 @@ class NewrelicTest extends TestCase
     {
         $flag = true;
 
-        $result = true;
+        $result = null;
 
         $handler = $this->getHandlerSpy(
             'newrelic_background_job',
@@ -111,7 +111,7 @@ class NewrelicTest extends TestCase
     {
         $enable = true;
 
-        $result = true;
+        $result = null;
 
         $handler = $this->getHandlerSpy(
             'newrelic_capture_params',
@@ -182,12 +182,13 @@ class NewrelicTest extends TestCase
             'newrelic_end_transaction',
             array(
                 $ignore,
-            )
+            ),
+            true
         );
 
         $agent = new Newrelic(false, $handler);
 
-        $this->assertNull($agent->endTransaction($ignore));
+        $this->assertTrue($agent->endTransaction($ignore));
     }
 
     public function testGetBrowserTimingFooter()
@@ -276,7 +277,7 @@ class NewrelicTest extends TestCase
         $message = 'foo';
         $exception = new \InvalidArgumentException('bar');
 
-        $result = true;
+        $result = null;
 
         $handler = $this->getHandlerSpy(
             'newrelic_notice_error',
@@ -296,7 +297,7 @@ class NewrelicTest extends TestCase
     {
         $message = 'foo';
 
-        $result = true;
+        $result = null;
 
         $handler = $this->getHandlerSpy(
             'newrelic_notice_error',
@@ -342,7 +343,7 @@ class NewrelicTest extends TestCase
             'qux' => false,
         );
 
-        $result = true;
+        $result = null;
 
         $handler = $this->getHandlerSpy(
             'newrelic_record_custom_event',
