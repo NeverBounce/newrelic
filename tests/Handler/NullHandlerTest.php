@@ -4,6 +4,7 @@ namespace Intouch\Newrelic\Test\Handler;
 
 use Intouch\Newrelic\Handler\NullHandler;
 use PHPUnit\Framework\TestCase;
+use Intouch\Newrelic\Handler\Handler;
 
 class NullHandlerTest extends TestCase
 {
@@ -11,7 +12,7 @@ class NullHandlerTest extends TestCase
     {
         $handler = new NullHandler();
 
-        $this->assertInstanceOf('Intouch\Newrelic\Handler\Handler', $handler);
+        $this->assertInstanceOf(Handler::class, $handler);
     }
 
     public function testHandleReturnsFalse()

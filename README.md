@@ -10,10 +10,18 @@ This is simply a pass-through wrapper to the [NewRelic PHP Agent API](https://ne
 
 ### Installation
 
-Run
-
-```
-$ composer require intouch/newrelic
+```json
+{
+    "require": {,
+        "intouch/newrelic": "dev-master"
+    },
+    "repositories": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/NeverBounce/newrelic"
+        }
+    ],
+}
 ```
 
 ### Basic Use

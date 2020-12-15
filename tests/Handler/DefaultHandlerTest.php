@@ -4,6 +4,7 @@ namespace Intouch\Newrelic\Test\Handler;
 
 use Intouch\Newrelic\Handler\DefaultHandler;
 use PHPUnit\Framework\TestCase;
+use Intouch\Newrelic\Handler\Handler;
 
 class DefaultHandlerTest extends TestCase
 {
@@ -11,7 +12,7 @@ class DefaultHandlerTest extends TestCase
     {
         $handler = new DefaultHandler();
 
-        $this->assertInstanceOf('Intouch\Newrelic\Handler\Handler', $handler);
+        $this->assertInstanceOf(Handler::class, $handler);
     }
     public function testHandleCallsFunctionWithArguments()
     {
