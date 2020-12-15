@@ -12,9 +12,9 @@ This is simply a pass-through wrapper to the [NewRelic PHP Agent API](https://ne
 
 ```json
 {
-    "dependencies": [
+    "require": {,
         "intouch/newrelic": "dev-master"
-    ],
+    },
     "repositories": [
         {
           "type": "vcs",
