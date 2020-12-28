@@ -12,7 +12,7 @@ This is simply a pass-through wrapper to the [NewRelic PHP Agent API](https://ne
 
 ```json
 {
-    "require": {,
+    "require": {
         "intouch/newrelic": "dev-master"
     },
     "repositories": [
@@ -20,7 +20,7 @@ This is simply a pass-through wrapper to the [NewRelic PHP Agent API](https://ne
           "type": "vcs",
           "url": "https://github.com/NeverBounce/newrelic"
         }
-    ],
+    ]
 }
 ```
 
